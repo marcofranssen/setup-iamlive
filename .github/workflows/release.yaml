@@ -1,0 +1,51 @@
+name: Release
+on:
+  push:
+    tags:
+      - v*
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: '16'
+
+      - name: Setup yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check dist updated
+        run: |
+          yarn build
+          git diff --quiet -- dist || {
+            echo "::error::The ./dist is outdated, run 'yarn build' and commit"
+            exit 1
+          }
+
+      - uses: ncipollo/release-action@v1.10.0
+        id: release
+        with:
+          draft: ${{ contains(github.ref, '-draft') }}
+          prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}
+          generateReleaseNotes: true
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Workflow notices
+        run: echo "::notice title=Release::${{ steps.release.outputs.html_url }}"
