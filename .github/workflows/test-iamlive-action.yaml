@@ -1,0 +1,57 @@
+name: Test iamlive action
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-dist:
+    name: Check dist
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3.0.2
+
+      - name: Check diff is up to date
+        run: |
+          git diff --quiet -- dist || {
+            echo "::error::The ./dist is outdated, run 'yarn build' and commit"
+            exit 1
+          }
+
+  utilize:
+    name: Use iamlive action
+    runs-on: ubuntu-22.04
+
+    needs: [check-dist]
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3.0.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: '16'
+
+      - name: Setup iamlive
+        id: setup-iamlive
+        uses: ./
+        with:
+          iamlive-version: v0.48.0
+
+      - name: Check output and installPath
+        run: |
+          [ "${IAMLIVE_VERSION}" == v0.48.0 ] || { echo >&2 "::error::Expected v0.48.0 to be installed."; }
+          hash iamlive 2>/dev/null || { echo >&2 "iamlive can not be found in the PATH."; exit 1; }
+
+          echo "::notice::Installed iamlive ${IAMLIVE_VERSION} at $(which iamlive)"
+        env:
+          IAMLIVE_VERSION: ${{ steps.setup-iamlive.outputs.iamlive-version }}
