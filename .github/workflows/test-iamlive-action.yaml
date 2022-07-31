@@ -103,3 +103,5 @@ jobs:
             sleep 1
           done
           cat test-policy.json
+          cat test-policy.json | grep 's3:CreateBucket'
+          cat test-policy.json | grep 's3:ListAllMyBuckets'
