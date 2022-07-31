@@ -66,6 +66,8 @@ jobs:
         uses: ./
         with:
           iamlive-version: v0.48.0
+          auto-capture: true
+          output-file: ./test-policy.json
 
       - name: Check output and installPath
         run: |
@@ -85,23 +87,29 @@ jobs:
           localstack wait -t 30
           echo "Startup complete"
 
-      - name: Start iamlive capture
-        run: iamlive --background --sort-alphabetical --output-file test-policy.json
-
       - name: Call a bunch of aws apis
         run: |
           awslocal s3 mb s3://test
           awslocal s3 ls
 
-      - name: Stop iamlive and capture outputs
+      - name: Is iamlive still running
+        run: ps aux | grep iamlive
+
+  assert:
+    name: Assert policy
+    runs-on: ubuntu-22.04
+
+    needs: [utilize]
+
+    steps:
+      - name: download-policy
+        uses: actions/download-artifact@v3.0.0
+        with:
+          name: test-policy.json
+
+      - name: check-policy
         run: |
-          echo "Waiting 5 secs for iamlive to process all the permissions"
-          sleep 5
-          while ps -ef | grep iamlive | grep -v grep
-          do
-            kill -s SIGTERM `ps -ef | grep iamlive | grep -v grep | awk '{print $2}'`
-            sleep 1
-          done
-          cat test-policy.json
+          echo "assert policy has file"
+          cat ./test-policy.json
           cat test-policy.json | grep 's3:CreateBucket'
           cat test-policy.json | grep 's3:ListAllMyBuckets'

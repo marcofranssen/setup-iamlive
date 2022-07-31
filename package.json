@@ -7,13 +7,18 @@
   "author": "Marco Franssen <marco.franssen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "ncc build -m -s --license licenses.txt",
+    "build": "yarn build-main && yarn build-post",
+    "build-main": "ncc build -m -s --license licenses.txt",
+    "build-post": "ncc build capture-policy.js -m -s --license licenses.txt -o dist/capture-policy",
     "build:watch": "ncc build -m -s --license licenses.txt -w",
-    "test-run": "act"
+    "build-post:watch": "ncc build capture-policy.js -m -s --license licenses.txt -o dist/capture-policy -w",
+    "test-run": "act -j assert"
   },
   "dependencies": {
+    "@actions/artifact": "^1.1.0",
     "@actions/core": "^1.9.0",
-    "@actions/tool-cache": "^2.0.1"
+    "@actions/tool-cache": "^2.0.1",
+    "find-process": "^1.4.7"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.34.0"
