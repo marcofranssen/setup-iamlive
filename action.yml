@@ -10,9 +10,20 @@ inputs:
       The iamlive version you want to use (defaults to v0.48.0).
     required: false
     default: v0.48.0
+  auto-capture:
+    description: >-
+      If enabled, iamlive will auto-capture the policy in the given output-file and upload it as artifact.
+    required: false
+    default: "false"
+  output-file:
+    description: >-
+      The file to write the policy to (defaults to iamlive-policy.json).
+    required: false
+    default: iamlive-policy.json
 outputs:
   iamlive-version:
     description: 'The iamlive version that was installed'
 runs:
   using: 'node16'
   main: 'dist/index.js'
+  post: 'dist/capture-policy/index.js'
