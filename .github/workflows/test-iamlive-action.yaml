@@ -22,7 +22,7 @@ jobs:
           node-version: '16'
 
       - name: Setup yarn
-        run: npm install -g yarn
+        run: npm install --location=global yarn
 
       - name: Install dependencies
         run: yarn install
@@ -44,6 +44,9 @@ jobs:
     permissions:
       contents: read
 
+    env:
+      AWS_CSM_ENABLED: 'true'
+
     steps:
       - name: Check out code
         uses: actions/checkout@v3.0.2
@@ -52,6 +55,11 @@ jobs:
         uses: actions/setup-node@v3.4.1
         with:
           node-version: '16'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4.1.0
+        with:
+          python-version: '3.x'
 
       - name: Setup iamlive
         id: setup-iamlive
@@ -67,3 +75,31 @@ jobs:
           echo "::notice::Installed iamlive ${IAMLIVE_VERSION} at $(which iamlive)"
         env:
           IAMLIVE_VERSION: ${{ steps.setup-iamlive.outputs.iamlive-version }}
+
+      - name: Setup LocalStack
+        run: |
+          pip install localstack awscli-local[ver1]
+          docker pull localstack/localstack
+          localstack start -d
+          echo "Waiting for LocalStack startup..."
+          localstack wait -t 30
+          echo "Startup complete"
+
+      - name: Start iamlive capture
+        run: iamlive --background --sort-alphabetical --output-file test-policy.json
+
+      - name: Call a bunch of aws apis
+        run: |
+          awslocal s3 mb s3://test
+          awslocal s3 ls
+
+      - name: Stop iamlive and capture outputs
+        run: |
+          echo "Waiting 5 secs for iamlive to process all the permissions"
+          sleep 5
+          while ps -ef | grep iamlive | grep -v grep
+          do
+            kill -s SIGTERM `ps -ef | grep iamlive | grep -v grep | awk '{print $2}'`
+            sleep 1
+          done
+          cat test-policy.json
