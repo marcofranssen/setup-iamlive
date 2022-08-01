@@ -1,6 +1,6 @@
 {
   "name": "setup-iamlive",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Capture the used AWS IAM permissions using client-side monitoring (CSM) within your workflow.",
   "main": "index.js",
   "repository": "git@github.com:marcofranssen/setup-iamlive.git",
