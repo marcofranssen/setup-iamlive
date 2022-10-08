@@ -1,17 +1,58 @@
 name: Dependabot PR
 on:
   pull_request:
-    types: [opened, synchronize, edited, reopened]
-    branches:
-      - dependabot/**
+    types: [opened, reopened, synchronize]
 
 jobs:
+  print-info:
+    name: Print PR info
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Print some event info
+        run: |
+          echo Ref: ${{ github.ref }}
+          echo Head-Ref: ${{ github.head_ref }}
+          echo Actor: ${{ github.actor }}
+          echo Event: ${{ github.event.pull_request }}
+
+  auto-approve-pr:
+    name: Auto approve dependabot PR
+    runs-on: ubuntu-22.04
+    if: >
+      startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
+      github.actor == 'dependabot[bot]'
+
+    needs: [print-info]
+
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1.1.1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Approve a PR
+        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' }}
+        run: |
+          gh pr checkout "$PR_URL"
+          [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ] \
+            && gh pr review --approve "$PR_URL" -b "LGTM :rocket:"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   update-dist:
     name: Update dist
     runs-on: ubuntu-22.04
     if: >
       startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
       github.actor == 'dependabot[bot]'
+
+    needs: [auto-approve-pr]
 
     permissions:
       contents: write
@@ -37,39 +78,7 @@ jobs:
         run: yarn build
 
       - name: Commit new dist
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4.15.0
         with:
           file_pattern: dist
           commit_message: Build dist
-
-  auto-approve-pr:
-    name: Update dist
-    runs-on: ubuntu-22.04
-    if: >
-      startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
-      github.actor == 'dependabot[bot]'
-
-    needs: [update-dist]
-
-    permissions:
-      pull-requests: write
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3.0.2
-
-      - name: Dependabot metadata
-        id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v1.1.1
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Approve a PR
-        if: ${{ steps.dependabot-metadata.outputs.update-type == "version-update:semver-patch" }}
-        run: |
-          gh pr checkout "$PR_URL"
-          [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ] \
-            && gh pr review --approve "$PR_URL" -b "LGTM :rocket:"
-        env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
