@@ -1,7 +1,7 @@
-const os = require("os");
-const { spawn } = require("child_process");
-const core = require("@actions/core");
-const tc = require("@actions/tool-cache");
+import * as os from "os";
+import { ChildProcess, spawn } from "child_process";
+import * as core from "@actions/core";
+import * as tc from "@actions/tool-cache";
 
 export async function setupIamlive() {
   const iamliveVersion = core.getInput("iamlive-version");
@@ -34,7 +34,7 @@ export async function setupIamlive() {
   }
 }
 
-async function runIamlive(outputFile) {
+async function runIamlive(outputFile: string): Promise<ChildProcess> {
   return new Promise((resolve) => {
     const cmd = "iamlive";
     const options = [
@@ -53,22 +53,22 @@ async function runIamlive(outputFile) {
   });
 }
 
-function mapOS(os) {
-  const mappings = {
+function mapOS(os: string): string {
+  const mappings: Record<string, string> = {
     win32: "windows",
   };
   return mappings[os] || os;
 }
 
-function mapArch(arch) {
-  const mappings = {
+function mapArch(arch: string): string {
+  const mappings: Record<string, string> = {
     x32: "386",
     x64: "amd64",
   };
   return mappings[arch] || arch;
 }
 
-function extract(archive, platform) {
+function extract(archive: string, platform: string): Promise<string> {
   if (platform === "linux") {
     core.debug("Untarring iamlive CLI archive");
     return tc.extractTar(archive);
@@ -77,7 +77,7 @@ function extract(archive, platform) {
   return tc.extractZip(archive);
 }
 
-async function downloadCLI(url, platform) {
+async function downloadCLI(url: string, platform: string): Promise<string> {
   core.debug(`Downloading iamlive from ${url}…`);
   const pathToCLIArchive = await tc.downloadTool(url);
   core.debug(`iamlive CLI archive downloaded to ${pathToCLIArchive}`);

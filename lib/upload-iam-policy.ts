@@ -1,7 +1,7 @@
-const { readFile, open } = require("fs/promises");
-const { basename } = require("path");
-const core = require("@actions/core");
-const artifact = require("@actions/artifact");
+import { readFile, open, FileHandle } from "fs/promises";
+import { basename } from "path";
+import * as core from "@actions/core";
+import * as artifact from "@actions/artifact";
 const find = require("find-process");
 
 export async function capturePolicy() {
@@ -27,13 +27,13 @@ export async function capturePolicy() {
 
   if (core.isDebug()) {
     const policy = await readFile(policyFile);
-    core.debug(policy);
+    core.debug(policy.toString());
   }
 
   return uploadPolicy(uploadName, policyFile, 0);
 }
 
-async function shutdownIamLive() {
+async function shutdownIamLive(): Promise<void> {
   const pList = await find("name", "iamlive", true);
   if (pList.length == 0) {
     return Promise.resolve();
@@ -47,11 +47,11 @@ async function shutdownIamLive() {
   await shutdownIamLive();
 }
 
-function sleep(ms) {
+function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fileExists(fileName) {
+async function fileExists(fileName: string): Promise<boolean> {
   try {
     await open(fileName, "r");
     return true;
@@ -60,7 +60,11 @@ async function fileExists(fileName) {
   }
 }
 
-async function uploadPolicy(policyName, policyFile, retention) {
+async function uploadPolicy(
+  policyName: string,
+  policyFile: string,
+  retention: number
+): Promise<artifact.UploadResponse> {
   core.info(`Uploading ${policyFile} as ${policyName}`);
 
   const artifactClient = artifact.create();
