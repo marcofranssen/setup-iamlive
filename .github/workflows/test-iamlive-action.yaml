@@ -47,6 +47,11 @@ jobs:
     env:
       AWS_CSM_ENABLED: 'true'
 
+    strategy:
+      fail-fast: true
+      matrix:
+        iamliveVersion: [v0.48.0, v0.49.0]
+
     steps:
       - name: Check out code
         uses: actions/checkout@v3.0.2
@@ -65,7 +70,7 @@ jobs:
         id: setup-iamlive
         uses: ./
         with:
-          iamlive-version: v0.48.0
+          iamlive-version: ${{ matrix.iamliveVersion }}
           auto-capture: true
           output-file: ./test-policy.json
 
