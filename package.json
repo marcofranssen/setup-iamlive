@@ -2,7 +2,7 @@
   "name": "setup-iamlive",
   "version": "0.2.0",
   "description": "Capture the used AWS IAM permissions using client-side monitoring (CSM) within your workflow.",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "git@github.com:marcofranssen/setup-iamlive.git",
   "author": "Marco Franssen <marco.franssen@gmail.com>",
   "license": "MIT",
@@ -21,6 +21,9 @@
     "find-process": "^1.4.7"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.34.0"
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.8.3",
+    "@vercel/ncc": "^0.34.0",
+    "typescript": "^4.8.4"
   }
 }
