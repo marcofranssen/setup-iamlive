@@ -29,6 +29,11 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3.1.0
+        with:
+          ref: ${{ github.head_ref }}
+
       - name: Dependabot metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@v1.3.4
