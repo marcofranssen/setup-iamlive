@@ -24,6 +24,6 @@
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.11.13",
     "@vercel/ncc": "^0.34.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   }
 }
