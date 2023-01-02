@@ -13,9 +13,9 @@ env:
   AWS_CSM_ENABLED: 'true'
 
 steps:
-  - uses: marcofranssen/setup-iamlive@v0.2.0
+  - uses: marcofranssen/setup-iamlive@v0.2.2
     with:
-      iamlive-version: v0.48.0
+      iamlive-version: v0.50.0
   - run: ./iamlive --background --sort-alphabetical --output-file iamlive-policy.json
   - run: |
       aws s3 mb s3://test-bucket
@@ -46,9 +46,9 @@ env:
   AWS_CSM_ENABLED: 'true'
 
 steps:
-  - uses: marcofranssen/setup-iamlive@v0.2.0
+  - uses: marcofranssen/setup-iamlive@v0.2.2
     with:
-      iamlive-version: v0.48.0
+      iamlive-version: v0.50.0
       auto-capture: true
       output-file: iamlive-policy.json
   - run: aws s3 ls
