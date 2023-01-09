@@ -108,7 +108,7 @@ jobs:
 
     steps:
       - name: download-policy
-        uses: actions/download-artifact@v3.0.1
+        uses: actions/download-artifact@v3.0.2
         with:
           name: test-policy.json
 
