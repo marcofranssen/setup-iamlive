@@ -56,10 +56,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-16.1.0.tgz#50bf40941c073fb56e4190ff4a3bf28259983770"
   integrity sha512-cfwhqrdZEKS+Iqu1OPDwmKsOV/eo7q4sPhWzOXc1rU77nnPFV3+77yPg8uKQ2e8eir6mERCvrKnd+EGa4qo4bQ==
 
-"@types/node@^18.15.11":
-  version "18.15.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.11.tgz#b3b790f09cb1696cffcec605de025b088fa4225f"
-  integrity sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==
+"@types/node@^20.4.4":
+  version "20.4.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.4.tgz#c79c7cc22c9d0e97a7944954c9e663bcbd92b0cb"
+  integrity sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==
 
 "@vercel/ncc@^0.36.1":
   version "0.36.1"
