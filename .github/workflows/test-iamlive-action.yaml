@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.48.0, v0.49.0]
+        iamliveVersion: [v0.48.0, v0.49.0, v0.53.0]
 
     steps:
       - name: Check out code
