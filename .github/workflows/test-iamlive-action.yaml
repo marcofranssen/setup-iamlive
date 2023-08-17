@@ -21,17 +21,17 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Setup yarn
-        run: npm install --location=global yarn
+      - name: Setup pnpm
+        run: npm install --location=global pnpm
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Check diff is up to date
         run: |
-          yarn build
+          pnpm build
           git diff --quiet -- dist || {
-            echo "::error::The ./dist is outdated, run 'yarn build' and commit"
+            echo "::error::The ./dist is outdated, run 'pnpm build' and commit"
             exit 1
           }
 

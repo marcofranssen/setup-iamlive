@@ -20,7 +20,7 @@ jobs:
     name: Auto approve dependabot PR
     runs-on: ubuntu-22.04
     if: >
-      startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
+      startsWith(github.head_ref, 'dependabot/npm_and_pnpm') &&
       github.actor == 'dependabot[bot]'
 
     needs: [print-info]
@@ -54,7 +54,7 @@ jobs:
     name: Update dist
     runs-on: ubuntu-22.04
     if: >
-      startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
+      startsWith(github.head_ref, 'dependabot/npm_and_pnpm') &&
       github.actor == 'dependabot[bot]'
 
     needs: [auto-approve-pr]
@@ -73,14 +73,14 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Setup yarn
-        run: npm install --location=global yarn
+      - name: Setup pnpm
+        run: npm install --location=global pnpm
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Update dist
-        run: yarn build
+        run: pnpm build
 
       - name: Commit new dist
         uses: stefanzweifel/git-auto-commit-action@v4.16.0
