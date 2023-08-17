@@ -15,7 +15,7 @@ env:
 steps:
   - uses: marcofranssen/setup-iamlive@v0.2.2
     with:
-      iamlive-version: v0.50.0
+      iamlive-version: v0.53.0
   - run: ./iamlive --background --sort-alphabetical --output-file iamlive-policy.json
   - run: |
       aws s3 mb s3://test-bucket
@@ -48,7 +48,7 @@ env:
 steps:
   - uses: marcofranssen/setup-iamlive@v0.2.2
     with:
-      iamlive-version: v0.50.0
+      iamlive-version: v0.53.0
       auto-capture: true
       output-file: iamlive-policy.json
   - run: aws s3 ls

@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.48.0, v0.49.0]
+        iamliveVersion: [v0.48.0, v0.49.0, v0.53.0]
 
     steps:
       - name: Check out code
@@ -76,7 +76,7 @@ jobs:
 
       - name: Check output and installPath
         run: |
-          [ "${IAMLIVE_VERSION}" == v0.48.0 ] || { echo >&2 "::error::Expected v0.48.0 to be installed."; }
+          [ "${IAMLIVE_VERSION}" == ${{ matrix.iamliveVersion }} ] || { echo >&2 "::error::Expected ${{ matrix.iamliveVersion }} to be installed."; exit 1; }
           hash iamlive 2>/dev/null || { echo >&2 "iamlive can not be found in the PATH."; exit 1; }
 
           echo "::notice::Installed iamlive ${IAMLIVE_VERSION} at $(which iamlive)"
