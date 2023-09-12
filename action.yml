@@ -24,6 +24,6 @@ outputs:
   iamlive-version:
     description: 'The iamlive version that was installed'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
   post: 'dist/capture-policy/index.js'
