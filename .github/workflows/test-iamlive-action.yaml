@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.48.0, v0.49.0, v0.53.0]
+        iamliveVersion: [v0.49.0, v0.53.0, v1.1.6]
 
     steps:
       - name: Check out code
@@ -72,7 +72,7 @@ jobs:
         with:
           iamlive-version: ${{ matrix.iamliveVersion }}
           auto-capture: true
-          output-file: ./test-policy.json
+          output-file: ./test-policy-${{ matrix.iamliveVersion }}.json
 
       - name: Check output and installPath
         run: |
@@ -106,15 +106,20 @@ jobs:
 
     needs: [utilize]
 
+    strategy:
+      fail-fast: true
+      matrix:
+        iamliveVersion: [v0.49.0, v0.53.0, v1.1.6]
+
     steps:
       - name: download-policy
         uses: actions/download-artifact@v4.1.0
         with:
-          name: test-policy.json
+          name: test-policy-${{ matrix.iamliveVersion }}.json
 
       - name: check-policy
         run: |
           echo "assert policy has file"
-          cat ./test-policy.json
-          cat test-policy.json | grep 's3:CreateBucket'
-          cat test-policy.json | grep 's3:ListAllMyBuckets'
+          cat ./test-policy-${{ matrix.iamliveVersion }}.json
+          cat test-policy-${{ matrix.iamliveVersion }}.json | grep 's3:CreateBucket'
+          cat test-policy-${{ matrix.iamliveVersion }}.json | grep 's3:ListAllMyBuckets'
