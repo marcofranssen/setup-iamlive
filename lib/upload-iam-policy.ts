@@ -1,8 +1,9 @@
-import { readFile, open, FileHandle } from "fs/promises";
+import find from "find-process";
 import { basename } from "path";
+import { readFile, open } from "fs/promises";
 import * as core from "@actions/core";
-import * as artifact from "@actions/artifact";
-const find = require("find-process");
+import { DefaultArtifactClient } from "@actions/artifact";
+import type { UploadArtifactResponse } from "@actions/artifact";
 
 export async function capturePolicy() {
   const autoCapture = core.getBooleanInput("auto-capture");
@@ -22,7 +23,7 @@ export async function capturePolicy() {
   core.debug(`Checking policyFile ${policyFile}`);
   if (!(await fileExists(policyFile))) {
     core.debug("File not found.");
-    return Promise.reject(`PolicyFile ${policyFile} not found.`);
+    throw new Error(`PolicyFile ${policyFile} not found.`);
   }
 
   if (core.isDebug()) {
@@ -64,10 +65,10 @@ async function uploadPolicy(
   policyName: string,
   policyFile: string,
   retention: number
-): Promise<artifact.UploadResponse> {
+): Promise<UploadArtifactResponse> {
   core.info(`Uploading ${policyFile} as ${policyName}`);
 
-  const artifactClient = artifact.create();
+  const artifactClient = new DefaultArtifactClient();
 
   const rootDirectory = ".";
   const options = {
@@ -82,7 +83,7 @@ async function uploadPolicy(
     options
   );
 
-  core.debug(`Policy upload result: ${uploadResponse}`);
+  core.debug(`Policy upload result: ${JSON.stringify(uploadResponse)}`);
 
   return uploadResponse;
 }
