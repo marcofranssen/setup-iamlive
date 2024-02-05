@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@actions/artifact':
-    specifier: ^2.1.0
-    version: 2.1.0
+    specifier: ^2.1.1
+    version: 2.1.1
   '@actions/core':
     specifier: ^1.10.1
     version: 1.10.1
@@ -34,8 +34,8 @@ devDependencies:
 
 packages:
 
-  /@actions/artifact@2.1.0:
-    resolution: {integrity: sha512-R7RI/5tnbOAWPrkKisB0DK58K5jMiizk1weoQQSN9m20dhCmRhGsQtOzNCVeAbOBXewn//1ddbGKKrtlSEvIUg==}
+  /@actions/artifact@2.1.1:
+    resolution: {integrity: sha512-xVVwWhrRb4YLiTeYkNxctv9IhwIKUsLwIhqD9CKknXtQaqIksq5HttFN8wXQvMrpjQO4zGJf5xLUs6mKyfN4yQ==}
     dependencies:
       '@actions/core': 1.10.1
       '@actions/github': 5.1.1
