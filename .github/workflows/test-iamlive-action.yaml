@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.49.0, v0.53.0, v1.1.6]
+        iamliveVersion: [v0.49.0, v0.53.0, v1.1.8]
 
     steps:
       - name: Check out code
@@ -109,7 +109,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.49.0, v0.53.0, v1.1.6]
+        iamliveVersion: [v0.49.0, v0.53.0, v1.1.8]
 
     steps:
       - name: download-policy
