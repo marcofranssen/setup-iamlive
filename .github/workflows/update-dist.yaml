@@ -83,7 +83,7 @@ jobs:
         run: pnpm build
 
       - name: Commit new dist
-        uses: stefanzweifel/git-auto-commit-action@v5.0.0
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
           file_pattern: dist
           commit_message: Build dist
