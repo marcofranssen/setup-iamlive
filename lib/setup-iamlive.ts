@@ -104,7 +104,7 @@ async function downloadCLI(
   const pathToCLIArchive = await tc.downloadTool(url);
   core.debug(`iamlive CLI archive downloaded to ${pathToCLIArchive}`);
 
-  if (!verifyChecksum(pathToCLIArchive, checksums[version])) {
+  if (!(await verifyChecksum(pathToCLIArchive, checksums[version]))) {
     throw new Error(`Checksum didn't match: ${checksums[version]}.`);
   }
 
@@ -129,6 +129,6 @@ async function verifyChecksum(
   const rs = await readFile(download);
   const digest = createHash("sha256").update(rs).digest("hex");
   const grepChecksum = new RegExp(`.*${download.split("/").pop()}$/gm`);
-  const matches = checksums.match(grepChecksum);
+  const matches = grepChecksum.exec(checksums);
   return matches?.[0] === digest;
 }
