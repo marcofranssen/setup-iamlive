@@ -54,7 +54,8 @@ function sleep(ms: number): Promise<void> {
 
 async function fileExists(fileName: string): Promise<boolean> {
   try {
-    await open(fileName, "r");
+    const file = await open(fileName, "r");
+    file.close();
     return true;
   } catch (e) {
     return false;
