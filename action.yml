@@ -7,9 +7,9 @@ author: Marco Franssen
 inputs:
   iamlive-version:
     description: >-
-      The iamlive version you want to use (defaults to v1.1.8).
+      The iamlive version you want to use (defaults to v1.1.11).
     required: false
-    default: v1.1.8
+    default: v1.1.11
   auto-capture:
     description: >-
       If enabled, iamlive will auto-capture the policy in the given output-file and upload it as artifact.
