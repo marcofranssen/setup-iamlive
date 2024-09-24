@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.49.0, v0.53.0, v1.1.8]
+        iamliveVersion: [v1.1.8, v1.1.11]
 
     steps:
       - name: Check out code
@@ -109,7 +109,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        iamliveVersion: [v0.49.0, v0.53.0, v1.1.8]
+        iamliveVersion: [v1.1.8, v1.1.11]
 
     steps:
       - name: download-policy
@@ -120,6 +120,6 @@ jobs:
       - name: check-policy
         run: |
           echo "assert policy has file"
-          cat ./test-policy-${{ matrix.iamliveVersion }}.json
+          cat test-policy-${{ matrix.iamliveVersion }}.json
           cat test-policy-${{ matrix.iamliveVersion }}.json | grep 's3:CreateBucket'
           cat test-policy-${{ matrix.iamliveVersion }}.json | grep 's3:ListAllMyBuckets'
