@@ -28,8 +28,8 @@ importers:
         specifier: ^22.9.4
         version: 22.9.4
       '@vercel/ncc':
-        specifier: ^0.38.2
-        version: 0.38.2
+        specifier: ^0.38.3
+        version: 0.38.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -196,8 +196,8 @@ packages:
   '@types/node@22.9.4':
     resolution: {integrity: sha512-d9RWfoR7JC/87vj7n+PVTzGg9hDyuFjir3RxUHbjFSKNd9mpxbxwMEyaCim/ddCmy4IuW7HjTzF3g9p3EtWEOg==}
 
-  '@vercel/ncc@0.38.2':
-    resolution: {integrity: sha512-3yel3jaxUg9pHBv4+KeC9qlbdZPug+UMtUOlhvpDYCMSgcNSrS2Hv1LoqMsOV7hf2lYscx+BESfJOIla1WsmMQ==}
+  '@vercel/ncc@0.38.3':
+    resolution: {integrity: sha512-rnK6hJBS6mwc+Bkab+PGPs9OiS0i/3kdTO+CkI8V0/VrW3vmz7O2Pxjw/owOlmo6PKEIxRSeZKv/kuL9itnpYA==}
     hasBin: true
 
   abort-controller@3.0.0:
@@ -965,7 +965,7 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
-  '@vercel/ncc@0.38.2': {}
+  '@vercel/ncc@0.38.3': {}
 
   abort-controller@3.0.0:
     dependencies:
