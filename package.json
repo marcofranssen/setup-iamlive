@@ -15,7 +15,7 @@
     "test-run": "act -j assert"
   },
   "dependencies": {
-    "@actions/artifact": "^2.1.11",
+    "@actions/artifact": "^2.2.0",
     "@actions/core": "^1.11.1",
     "@actions/tool-cache": "^2.0.1",
     "find-process": "^1.4.7"
