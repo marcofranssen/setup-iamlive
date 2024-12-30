@@ -18,7 +18,7 @@
     "@actions/artifact": "^2.2.0",
     "@actions/core": "^1.11.1",
     "@actions/tool-cache": "^2.0.1",
-    "find-process": "^1.4.7"
+    "find-process": "^1.4.8"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
