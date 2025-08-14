@@ -56,6 +56,7 @@ async function runIamlive(outputFile: string): Promise<ChildProcess> {
   return new Promise((resolve) => {
     const cmd = "iamlive";
     const options = [
+      "--set-ini",
       "--background",
       "--sort-alphabetical",
       "--output-file",
