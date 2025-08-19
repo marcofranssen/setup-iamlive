@@ -25,8 +25,8 @@ importers:
         specifier: ^20.1.6
         version: 20.1.6
       '@types/node':
-        specifier: ^24.2.0
-        version: 24.2.0
+        specifier: ^24.3.0
+        version: 24.3.0
       '@vercel/ncc':
         specifier: ^0.38.3
         version: 0.38.3
@@ -192,8 +192,8 @@ packages:
   '@tsconfig/node20@20.1.6':
     resolution: {integrity: sha512-sz+Hqx9zwZDpZIV871WSbUzSqNIsXzghZydypnfgzPKLltVJfkINfUeTct31n/tTSa9ZE1ZOfKdRre1uHHquYQ==}
 
-  '@types/node@24.2.0':
-    resolution: {integrity: sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==}
+  '@types/node@24.3.0':
+    resolution: {integrity: sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==}
 
   '@vercel/ncc@0.38.3':
     resolution: {integrity: sha512-rnK6hJBS6mwc+Bkab+PGPs9OiS0i/3kdTO+CkI8V0/VrW3vmz7O2Pxjw/owOlmo6PKEIxRSeZKv/kuL9itnpYA==}
@@ -952,7 +952,7 @@ snapshots:
 
   '@tsconfig/node20@20.1.6': {}
 
-  '@types/node@24.2.0':
+  '@types/node@24.3.0':
     dependencies:
       undici-types: 7.10.0
 
