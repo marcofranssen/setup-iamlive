@@ -25,8 +25,8 @@ importers:
         specifier: ^20.1.8
         version: 20.1.8
       '@types/node':
-        specifier: ^24.9.0
-        version: 24.9.0
+        specifier: ^24.10.1
+        version: 24.10.1
       '@vercel/ncc':
         specifier: ^0.38.4
         version: 0.38.4
@@ -229,8 +229,8 @@ packages:
   '@types/node-fetch@2.6.13':
     resolution: {integrity: sha512-QGpRVpzSaUs30JBSGPjOg4Uveu384erbHBoT1zeONvyCfwQxIkUshLAOqN/k9EjGviPRmWTTe6aH2qySWKTVSw==}
 
-  '@types/node@24.9.0':
-    resolution: {integrity: sha512-MKNwXh3seSK8WurXF7erHPJ2AONmMwkI7zAMrXZDPIru8jRqkk6rGDBVbw4mLwfqA+ZZliiDPg05JQ3uW66tKQ==}
+  '@types/node@24.10.1':
+    resolution: {integrity: sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==}
 
   '@types/tunnel@0.0.3':
     resolution: {integrity: sha512-sOUTGn6h1SfQ+gbgqC364jLFBw2lnFqkgF3q0WovEHRLMrVD1sd5aufqi/aJObLekJO+Aq5z646U4Oxy6shXMA==}
@@ -1093,16 +1093,16 @@ snapshots:
 
   '@types/node-fetch@2.6.13':
     dependencies:
-      '@types/node': 24.9.0
+      '@types/node': 24.10.1
       form-data: 4.0.4
 
-  '@types/node@24.9.0':
+  '@types/node@24.10.1':
     dependencies:
       undici-types: 7.16.0
 
   '@types/tunnel@0.0.3':
     dependencies:
-      '@types/node': 24.9.0
+      '@types/node': 24.10.1
 
   '@typescript/vfs@1.6.2(typescript@5.4.5)':
     dependencies:
