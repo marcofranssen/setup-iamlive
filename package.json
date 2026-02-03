@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@actions/artifact": "^6.1.0",
-    "@actions/core": "^2.0.2",
+    "@actions/core": "^3.0.0",
     "@actions/tool-cache": "^4.0.0",
     "find-process": "^2.0.0"
   },
