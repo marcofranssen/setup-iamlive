@@ -22,8 +22,8 @@ importers:
         version: 2.0.0
     devDependencies:
       '@tsconfig/node20':
-        specifier: ^20.1.8
-        version: 20.1.8
+        specifier: ^20.1.9
+        version: 20.1.9
       '@types/node':
         specifier: ^25.3.0
         version: 25.3.0
@@ -194,8 +194,8 @@ packages:
   '@protobuf-ts/runtime@2.11.1':
     resolution: {integrity: sha512-KuDaT1IfHkugM2pyz+FwiY80ejWrkH1pAtOBOZFuR6SXEFTsnb/jiQWQ1rCIrcKx2BtyxnxW6BWwsVSA/Ie+WQ==}
 
-  '@tsconfig/node20@20.1.8':
-    resolution: {integrity: sha512-Em+IdPfByIzWRRpqWL4Z7ArLHZGxmc36BxE3jCz9nBFSm+5aLaPMZyjwu4yetvyKXeogWcxik4L1jB5JTWfw7A==}
+  '@tsconfig/node20@20.1.9':
+    resolution: {integrity: sha512-IjlTv1RsvnPtUcjTqtVsZExKVq+KQx4g5pCP5tI7rAs6Xesl2qFwSz/tPDBC4JajkL/MlezBu3gPUwqRHl+RIg==}
 
   '@types/node@25.3.0':
     resolution: {integrity: sha512-4K3bqJpXpqfg2XKGK9bpDTc6xO/xoUP/RBWS7AtRMug6zZFaRekiLzjVtAoZMquxoAbzBvy5nxQ7veS5eYzf8A==}
@@ -891,7 +891,7 @@ snapshots:
 
   '@protobuf-ts/runtime@2.11.1': {}
 
-  '@tsconfig/node20@20.1.8': {}
+  '@tsconfig/node20@20.1.9': {}
 
   '@types/node@25.3.0':
     dependencies:
