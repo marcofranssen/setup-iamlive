@@ -7,11 +7,8 @@
   "author": "Marco Franssen <marco.franssen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "pnpm build-main && pnpm build-post",
-    "build-main": "ncc build -m -s --license licenses.txt",
-    "build-post": "ncc build capture-policy.js -m -s --license licenses.txt -o dist/capture-policy",
-    "build:watch": "ncc build -m -s --license licenses.txt -w",
-    "build-post:watch": "ncc build capture-policy.js -m -s --license licenses.txt -o dist/capture-policy -w",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
     "test-run": "act -j assert"
   },
   "dependencies": {
@@ -23,7 +20,8 @@
   "devDependencies": {
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^25.9.3",
-    "@vercel/ncc": "^0.44.0",
+    "tsup": "^8.5.1",
     "typescript": "^6.0.3"
-  }
+  },
+  "type": "module"
 }
