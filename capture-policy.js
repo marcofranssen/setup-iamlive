@@ -1,4 +1,4 @@
-const core = require("@actions/core");
-const { capturePolicy } = require("./lib/upload-iam-policy");
+import { setFailed } from "@actions/core";
+import { capturePolicy } from "./lib/upload-iam-policy";
 
-capturePolicy().catch((e) => core.setFailed(e.message));
+capturePolicy().catch((e) => setFailed(e.message));
