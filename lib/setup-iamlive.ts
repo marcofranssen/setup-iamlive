@@ -1,7 +1,8 @@
 import * as os from "os";
-import { readFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
 import { createHash } from "crypto";
 import { ChildProcess, spawn } from "child_process";
+import { dirname } from "path";
 import * as core from "@actions/core";
 import * as tc from "@actions/tool-cache";
 
@@ -47,9 +48,48 @@ export async function setupIamlive() {
   core.setOutput("iamlive-version", iamliveVersion);
 
   if (autoCapture) {
+    await ensureAwsConfigProfile();
     await runIamlive(outputFile);
     core.info("Running iamlive in the background");
   }
+}
+
+async function ensureAwsConfigProfile(): Promise<void> {
+  const configFile = expandHome(
+    process.env.AWS_CONFIG_FILE || `${os.homedir()}/.aws/config`
+  );
+
+  await mkdir(dirname(configFile), { recursive: true });
+
+  let config = "";
+  try {
+    config = await readFile(configFile, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  if (/^\[default\]\s*$/m.test(config)) {
+    return;
+  }
+
+  const separator = config.length > 0 && !config.endsWith("\n") ? "\n" : "";
+  await writeFile(configFile, `${config}${separator}[default]\n`, {
+    mode: 0o600,
+  });
+}
+
+function expandHome(path: string): string {
+  if (path === "~") {
+    return os.homedir();
+  }
+
+  if (path.startsWith("~/")) {
+    return `${os.homedir()}${path.slice(1)}`;
+  }
+
+  return path;
 }
 
 async function runIamlive(outputFile: string): Promise<ChildProcess> {
