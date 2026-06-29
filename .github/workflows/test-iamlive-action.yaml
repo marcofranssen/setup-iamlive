@@ -7,7 +7,7 @@ on:
 jobs:
   check-dist:
     name: Check dist
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: read
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6.4.0
         with:
-          node-version: '20'
+          node-version: "24"
 
       - name: Setup pnpm
         run: npm install --location=global pnpm
@@ -37,7 +37,7 @@ jobs:
 
   utilize:
     name: Use iamlive action
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     needs: [check-dist]
 
@@ -59,12 +59,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6.4.0
         with:
-          node-version: '20'
+          node-version: "24"
 
       - name: Setup Python
         uses: actions/setup-python@v6.2.0
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Setup iamlive
         id: setup-iamlive
@@ -102,7 +102,7 @@ jobs:
 
   assert:
     name: Assert policy
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     needs: [utilize]
 
