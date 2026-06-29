@@ -11,6 +11,7 @@ export default defineConfig({
   minify: true,
   sourcemap: true,
   splitting: false,
+  outExtension: () => ({ js: ".mjs" }),
   clean: true,
   dts: false,
   noExternal: [/.*/],

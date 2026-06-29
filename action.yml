@@ -25,5 +25,5 @@ outputs:
     description: "The iamlive version that was installed"
 runs:
   using: "node24"
-  main: "dist/index.js"
-  post: "dist/capture-policy/index.js"
+  main: "dist/index.mjs"
+  post: "dist/capture-policy/index.mjs"
