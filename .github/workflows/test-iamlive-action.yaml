@@ -45,7 +45,11 @@ jobs:
       contents: read
 
     env:
-      AWS_CSM_ENABLED: 'true'
+      AWS_CSM_ENABLED: "true"
+      AWS_EC2_METADATA_DISABLED: "true"
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
 
     strategy:
       fail-fast: true
@@ -60,11 +64,6 @@ jobs:
         uses: actions/setup-node@v6.4.0
         with:
           node-version: "24"
-
-      - name: Setup Python
-        uses: actions/setup-python@v6.2.0
-        with:
-          python-version: "3.x"
 
       - name: Setup iamlive
         id: setup-iamlive
@@ -83,19 +82,75 @@ jobs:
         env:
           IAMLIVE_VERSION: ${{ steps.setup-iamlive.outputs.iamlive-version }}
 
-      - name: Setup LocalStack
+      - name: Check AWS CLI
         run: |
-          pip install localstack awscli-local[ver1]
-          docker pull localstack/localstack
-          localstack start -d
-          echo "Waiting for LocalStack startup..."
-          localstack wait -t 30
-          echo "Startup complete"
+          aws --version
+
+      - name: Start stub S3 endpoint
+        run: |
+          node --input-type=module <<'NODE' >s3-stub.log 2>&1 &
+          import http from "node:http";
+
+          const listBucketsXml = `<?xml version="1.0" encoding="UTF-8"?>
+          <ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+            <Owner>
+              <ID>stub-owner</ID>
+              <DisplayName>stub-owner</DisplayName>
+            </Owner>
+            <Buckets>
+              <Bucket>
+                <Name>test</Name>
+                <CreationDate>2026-06-29T00:00:00.000Z</CreationDate>
+              </Bucket>
+            </Buckets>
+          </ListAllMyBucketsResult>`;
+
+          function sendXml(res, statusCode, body = "") {
+            res.writeHead(statusCode, {
+              "content-type": "application/xml",
+              "content-length": Buffer.byteLength(body),
+            });
+            res.end(body);
+          }
+
+          const server = http.createServer((req, res) => {
+            req.resume();
+            req.on("end", () => {
+              console.log(`${req.method} ${req.url}`);
+
+              if (req.method === "PUT" && /^\/test\/?$/.test(req.url ?? "")) {
+                sendXml(res, 200);
+                return;
+              }
+
+              if (req.method === "GET" && (req.url === "/" || req.url?.startsWith("/?"))) {
+                sendXml(res, 200, listBucketsXml);
+                return;
+              }
+
+              sendXml(res, 404, "<Error><Code>NoSuchBucket</Code></Error>");
+            });
+          });
+
+          process.on("SIGTERM", () => server.close(() => process.exit(0)));
+          server.listen(4566, "127.0.0.1");
+          NODE
+
+          for _ in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4566/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+
+          cat s3-stub.log
+          echo "::error::Stub S3 endpoint did not start"
+          exit 1
 
       - name: Call a bunch of aws apis
         run: |
-          awslocal s3 mb s3://test
-          awslocal s3 ls
+          aws --endpoint-url http://127.0.0.1:4566 s3 mb s3://test
+          aws --endpoint-url http://127.0.0.1:4566 s3 ls
 
       - name: Is iamlive still running
         run: ps aux | grep iamlive
