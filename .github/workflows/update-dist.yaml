@@ -6,7 +6,7 @@ on:
 jobs:
   print-info:
     name: Print PR info
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Print some event info
@@ -52,7 +52,7 @@ jobs:
 
   update-dist:
     name: Update dist
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: >
       startsWith(github.head_ref, 'dependabot/npm_and_pnpm') &&
       github.actor == 'dependabot[bot]'
@@ -71,7 +71,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6.4.0
         with:
-          node-version: '20'
+          node-version: "24"
 
       - name: Setup pnpm
         run: npm install --location=global pnpm
