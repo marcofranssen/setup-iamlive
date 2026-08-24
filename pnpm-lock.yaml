@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@actions/artifact':
         specifier: ^6.2.1
-        version: 6.2.1
+        version: 6.2.1(supports-color@7.2.0)
       '@actions/core':
         specifier: ^3.0.1
         version: 3.0.1
@@ -22,14 +22,14 @@ importers:
         version: 2.1.1
     devDependencies:
       '@tsconfig/node24':
-        specifier: ^24.0.4
-        version: 24.0.4
+        specifier: ^24.0.5
+        version: 24.0.5
       '@types/node':
         specifier: ^26.1.2
         version: 26.1.2
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(typescript@7.0.2)
+        version: 8.5.1(supports-color@7.2.0)(typescript@7.0.2)
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -403,66 +403,79 @@ packages:
     resolution: {integrity: sha512-T1dMEQhXA/jkJ/jyMIw9IovK8bSUq7A8kLIlvZTb/6YIVsp2zLavr4F3oyllHWo7eIVJRyE5n3tUjQJEbE1IuQ==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.62.0':
     resolution: {integrity: sha512-2as0LgT7qQpyceQq6VUJYnumUMUrgGQCWIiDIN9DE0/tglsk6o66uCB4f3djRawAltvfCNLyZZrsqbPA6inCsA==}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.62.0':
     resolution: {integrity: sha512-bVURMg+6eNN9C/yc0aVjooZcwTTtYF4YW3xta5pP0//r3o1V8gXEHXWCndj47w/HhwsFroZrFhR+6uQP5T0n0g==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.62.0':
     resolution: {integrity: sha512-Ful8pM/2yYI83PViWdFdpZhdI8HJ5qsXANe5atypbHDf+KIBBDsZsbyy8hbXnULVvW9NsTh5DHwbcBftyLTfiw==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-loong64-gnu@4.62.0':
     resolution: {integrity: sha512-9Gp/DgrkzfUBmNPVTyPTvay+4xEP7M/clXpj3efXBcm6uTIVIgDg4rqUpqKXvLEuFRVuEpSAOkhgNeecvaZ4Cg==}
     cpu: [loong64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-loong64-musl@4.62.0':
     resolution: {integrity: sha512-m9tsJz54LUXkSYM8+8PG81B9IKK5r+2T0clMq4QrS16xFosufU7firBDAZEsDheDs7wTlP7h3++S7lMsU955HA==}
     cpu: [loong64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-ppc64-gnu@4.62.0':
     resolution: {integrity: sha512-3UvJ5PNVU16aJf6M3tFI24pWzAl2/ynfbyRN3ICyQajK1lSkrnVYNnLz3v04J32qKa0FczJc22zeToc0lr2A3w==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-ppc64-musl@4.62.0':
     resolution: {integrity: sha512-vRWUAbYLGHBZS6Q8Msb2sfnf1fvJf+47t8l/TwOerM2qArzy+IeNMTHrYLHXh95h8MoatPHI5hhSZNs+mGXKPg==}
     cpu: [ppc64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-riscv64-gnu@4.62.0':
     resolution: {integrity: sha512-c00T5SYENHAt86cfW47URaP3Us5vLC/4QO7GYud1G5VNRffCwwCuBspwqYrriuJB+5m0WFzClCn9wed0FBjKvg==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.62.0':
     resolution: {integrity: sha512-krrCDilhXOwFkSkO3Wm9I/f9H0L92XHHwy2fwxjukxIbh0dem8gZqOW5Y8BsHrpJv5qwlRBV+Wl4ZFyRWhUpwg==}
     cpu: [riscv64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.62.0':
     resolution: {integrity: sha512-7pfYFSTc4/rUC/FtAI0Qp6QthDBCIi6/AuP1xYqFk5vanI6KnL5dWKP60OM/05LOsbwTmIcvr6eXC4CJuJ75IA==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.62.0':
     resolution: {integrity: sha512-7SDIalKeIpG0Ifogbbdn58HmSotYMlf23K3dCJEmiVd9Fg36Vmni82iPQec27N3wY4Bvbxftkxz6vSx9OcouTg==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.62.0':
     resolution: {integrity: sha512-eRZevouTH2i1HeAVLqJuLnt256krQkGY0TN6WsTmsIhuzbh457HuWDMakKwmi0Cjadux983CoSr8Lim2QhUIFw==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-openbsd-x64@4.62.0':
     resolution: {integrity: sha512-3oVS7FLGa4U1qcvao9ylGxrjXZyUQqR8UwxEcnUEyPX53O/C/mKDZegNXTdHCP+h3e6ta/f1EN38Yif1mmZHYg==}
@@ -494,8 +507,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@tsconfig/node24@24.0.4':
-    resolution: {integrity: sha512-2A933l5P5oCbv6qSxHs7ckKwobs8BDAe9SJ/Xr2Hy+nDlwmLE1GhFh/g/vXGRZWgxBg9nX/5piDtHR9Dkw/XuA==}
+  '@tsconfig/node24@24.0.5':
+    resolution: {integrity: sha512-DWC54fGPuhZgg3Ighg4Y/A/bA3ZdB5hnzAuv/MkQ/X85sVsBsMQxu8t7khutdYeiNksBbFdDyeqv1HSW2Zl8aA==}
 
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
@@ -1267,18 +1280,18 @@ packages:
 
 snapshots:
 
-  '@actions/artifact@6.2.1':
+  '@actions/artifact@6.2.1(supports-color@7.2.0)':
     dependencies:
       '@actions/core': 3.0.1
       '@actions/github': 9.0.0
       '@actions/http-client': 4.0.0
-      '@azure/storage-blob': 12.31.0
+      '@azure/storage-blob': 12.31.0(supports-color@7.2.0)
       '@octokit/core': 7.0.6
       '@octokit/plugin-request-log': 6.0.0(@octokit/core@7.0.6)
       '@octokit/plugin-retry': 8.1.0(@octokit/core@7.0.6)
       '@octokit/request': 10.0.8
       '@octokit/request-error': 7.1.0
-      '@protobuf-ts/plugin': 2.11.1
+      '@protobuf-ts/plugin': 2.11.1(supports-color@7.2.0)
       '@protobuf-ts/runtime': 2.11.1
       archiver: 7.0.1
       jwt-decode: 4.0.0
@@ -1337,37 +1350,37 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@azure/core-auth@1.10.1':
+  '@azure/core-auth@1.10.1(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-util': 1.13.1
+      '@azure/core-util': 1.13.1(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
-  '@azure/core-client@1.10.1':
+  '@azure/core-client@1.10.1(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
+      '@azure/core-auth': 1.10.1(supports-color@7.2.0)
+      '@azure/core-rest-pipeline': 1.23.0(supports-color@7.2.0)
       '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
+      '@azure/core-util': 1.13.1(supports-color@7.2.0)
+      '@azure/logger': 1.3.0(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
-  '@azure/core-http-compat@2.3.2(@azure/core-client@1.10.1)(@azure/core-rest-pipeline@1.23.0)':
+  '@azure/core-http-compat@2.3.2(@azure/core-client@1.10.1(supports-color@7.2.0))(@azure/core-rest-pipeline@1.23.0(supports-color@7.2.0))':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-client': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
+      '@azure/core-client': 1.10.1(supports-color@7.2.0)
+      '@azure/core-rest-pipeline': 1.23.0(supports-color@7.2.0)
 
-  '@azure/core-lro@2.7.2':
+  '@azure/core-lro@2.7.2(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
+      '@azure/core-util': 1.13.1(supports-color@7.2.0)
+      '@azure/logger': 1.3.0(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
@@ -1376,14 +1389,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@azure/core-rest-pipeline@1.23.0':
+  '@azure/core-rest-pipeline@1.23.0(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
+      '@azure/core-auth': 1.10.1(supports-color@7.2.0)
       '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
-      '@typespec/ts-http-runtime': 0.3.4
+      '@azure/core-util': 1.13.1(supports-color@7.2.0)
+      '@azure/logger': 1.3.0(supports-color@7.2.0)
+      '@typespec/ts-http-runtime': 0.3.4(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
@@ -1392,10 +1405,10 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@azure/core-util@1.13.1':
+  '@azure/core-util@1.13.1(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@typespec/ts-http-runtime': 0.3.4
+      '@typespec/ts-http-runtime': 0.3.4(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
@@ -1405,41 +1418,41 @@ snapshots:
       fast-xml-parser: 5.5.6
       tslib: 2.8.1
 
-  '@azure/logger@1.3.0':
+  '@azure/logger@1.3.0(supports-color@7.2.0)':
     dependencies:
-      '@typespec/ts-http-runtime': 0.3.4
+      '@typespec/ts-http-runtime': 0.3.4(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
-  '@azure/storage-blob@12.31.0':
+  '@azure/storage-blob@12.31.0(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-client': 1.10.1
-      '@azure/core-http-compat': 2.3.2(@azure/core-client@1.10.1)(@azure/core-rest-pipeline@1.23.0)
-      '@azure/core-lro': 2.7.2
+      '@azure/core-auth': 1.10.1(supports-color@7.2.0)
+      '@azure/core-client': 1.10.1(supports-color@7.2.0)
+      '@azure/core-http-compat': 2.3.2(@azure/core-client@1.10.1(supports-color@7.2.0))(@azure/core-rest-pipeline@1.23.0(supports-color@7.2.0))
+      '@azure/core-lro': 2.7.2(supports-color@7.2.0)
       '@azure/core-paging': 1.6.2
-      '@azure/core-rest-pipeline': 1.23.0
+      '@azure/core-rest-pipeline': 1.23.0(supports-color@7.2.0)
       '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
+      '@azure/core-util': 1.13.1(supports-color@7.2.0)
       '@azure/core-xml': 1.5.0
-      '@azure/logger': 1.3.0
-      '@azure/storage-common': 12.3.0(@azure/core-client@1.10.1)
+      '@azure/logger': 1.3.0(supports-color@7.2.0)
+      '@azure/storage-common': 12.3.0(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0)
       events: 3.3.0
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
-  '@azure/storage-common@12.3.0(@azure/core-client@1.10.1)':
+  '@azure/storage-common@12.3.0(@azure/core-client@1.10.1(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:
       '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-http-compat': 2.3.2(@azure/core-client@1.10.1)(@azure/core-rest-pipeline@1.23.0)
-      '@azure/core-rest-pipeline': 1.23.0
+      '@azure/core-auth': 1.10.1(supports-color@7.2.0)
+      '@azure/core-http-compat': 2.3.2(@azure/core-client@1.10.1(supports-color@7.2.0))(@azure/core-rest-pipeline@1.23.0(supports-color@7.2.0))
+      '@azure/core-rest-pipeline': 1.23.0(supports-color@7.2.0)
       '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
+      '@azure/core-util': 1.13.1(supports-color@7.2.0)
+      '@azure/logger': 1.3.0(supports-color@7.2.0)
       events: 3.3.0
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -1448,10 +1461,10 @@ snapshots:
 
   '@bufbuild/protobuf@2.11.0': {}
 
-  '@bufbuild/protoplugin@2.11.0':
+  '@bufbuild/protoplugin@2.11.0(supports-color@7.2.0)':
     dependencies:
       '@bufbuild/protobuf': 2.11.0
-      '@typescript/vfs': 1.6.4(typescript@5.4.5)
+      '@typescript/vfs': 1.6.4(supports-color@7.2.0)(typescript@5.4.5)
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -1623,10 +1636,10 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@protobuf-ts/plugin@2.11.1':
+  '@protobuf-ts/plugin@2.11.1(supports-color@7.2.0)':
     dependencies:
       '@bufbuild/protobuf': 2.11.0
-      '@bufbuild/protoplugin': 2.11.0
+      '@bufbuild/protoplugin': 2.11.0(supports-color@7.2.0)
       '@protobuf-ts/protoc': 2.11.1
       '@protobuf-ts/runtime': 2.11.1
       '@protobuf-ts/runtime-rpc': 2.11.1
@@ -1717,7 +1730,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.62.0':
     optional: true
 
-  '@tsconfig/node24@24.0.4': {}
+  '@tsconfig/node24@24.0.5': {}
 
   '@types/estree@1.0.9': {}
 
@@ -1785,17 +1798,17 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  '@typescript/vfs@1.6.4(typescript@5.4.5)':
+  '@typescript/vfs@1.6.4(supports-color@7.2.0)(typescript@5.4.5)':
     dependencies:
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@7.2.0)
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
 
-  '@typespec/ts-http-runtime@0.3.4':
+  '@typespec/ts-http-runtime@0.3.4(supports-color@7.2.0)':
     dependencies:
-      http-proxy-agent: 7.0.2
-      https-proxy-agent: 7.0.6
+      http-proxy-agent: 7.0.2(supports-color@7.2.0)
+      https-proxy-agent: 7.0.6(supports-color@7.2.0)
       tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
@@ -1964,9 +1977,11 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  debug@4.4.3:
+  debug@4.4.3(supports-color@7.2.0):
     dependencies:
       ms: 2.1.3
+    optionalDependencies:
+      supports-color: 7.2.0
 
   eastasianwidth@0.2.0: {}
 
@@ -2064,17 +2079,17 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  http-proxy-agent@7.0.2:
+  http-proxy-agent@7.0.2(supports-color@7.2.0):
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
 
-  https-proxy-agent@7.0.6:
+  https-proxy-agent@7.0.6(supports-color@7.2.0):
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -2363,13 +2378,13 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(typescript@7.0.2):
+  tsup@8.5.1(supports-color@7.2.0)(typescript@7.0.2):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.7)
       cac: 6.7.14
       chokidar: 4.0.3
       consola: 3.4.2
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@7.2.0)
       esbuild: 0.27.7
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
