@@ -20,7 +20,7 @@ jobs:
     name: Auto approve dependabot PR
     runs-on: ubuntu-22.04
     if: >
-      startsWith(github.head_ref, 'dependabot/npm_and_pnpm') &&
+      startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
       github.actor == 'dependabot[bot]'
 
     needs: [print-info]
@@ -54,7 +54,7 @@ jobs:
     name: Update dist
     runs-on: ubuntu-24.04
     if: >
-      startsWith(github.head_ref, 'dependabot/npm_and_pnpm') &&
+      startsWith(github.head_ref, 'dependabot/npm_and_yarn') &&
       github.actor == 'dependabot[bot]'
 
     needs: [auto-approve-pr]

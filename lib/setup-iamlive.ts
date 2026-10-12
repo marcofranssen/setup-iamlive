@@ -30,16 +30,19 @@ export async function setupIamlive() {
   const platform = mapOS(osPlatform);
   const arch = mapArch(osArch);
 
-  const downloadURL = `https://github.com/iann0036/iamlive/releases/download/${iamliveVersion}/iamlive-${iamliveVersion}-${platform}-${arch}.tar.gz`;
+  const releaseURL = `https://github.com/iann0036/iamlive/releases/download/${iamliveVersion}`;
+  const versionNumber = iamliveVersion.replace(/^v/, "");
+  const downloadURLs = [
+    // goreleaser asset names, used from v1.1.28
+    `${releaseURL}/iamlive_${versionNumber}_${platform}_${arch}.tar.gz`,
+    // legacy asset names, used up to v1.1.27
+    `${releaseURL}/iamlive-${iamliveVersion}-${platform}-${arch}.tar.gz`,
+  ];
 
   const cachedPath =
     tc.find("iamlive", iamliveVersion, osArch) ||
     (await (async () => {
-      const pathToCLI = await downloadCLI(
-        downloadURL,
-        iamliveVersion,
-        platform
-      );
+      const pathToCLI = await downloadCLI(downloadURLs, iamliveVersion);
       return tc.cacheDir(pathToCLI, "iamlive", iamliveVersion, osArch);
     })());
 
@@ -86,8 +89,8 @@ function mapArch(arch: string): string {
   return mappings[arch] || arch;
 }
 
-function extract(archive: string, platform: string): Promise<string> {
-  if (platform === "linux") {
+function extract(archive: string, url: string): Promise<string> {
+  if (url.endsWith(".tar.gz")) {
     core.debug("Untarring iamlive CLI archive");
     return tc.extractTar(archive);
   }
@@ -95,20 +98,33 @@ function extract(archive: string, platform: string): Promise<string> {
   return tc.extractZip(archive);
 }
 
-async function downloadCLI(
-  url: string,
-  version: string,
-  platform: string
-): Promise<string> {
-  core.debug(`Downloading iamlive from ${url}…`);
-  const pathToCLIArchive = await tc.downloadTool(url);
+async function downloadFirstAvailable(
+  urls: string[]
+): Promise<{ url: string; pathToCLIArchive: string }> {
+  for (const url of urls) {
+    core.debug(`Downloading iamlive from ${url}…`);
+    try {
+      return { url, pathToCLIArchive: await tc.downloadTool(url) };
+    } catch (err) {
+      if (err instanceof tc.HTTPError && err.httpStatusCode === 404) {
+        core.debug(`${url} not found, trying next asset name`);
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error(`Unable to download iamlive, tried: ${urls.join(", ")}`);
+}
+
+async function downloadCLI(urls: string[], version: string): Promise<string> {
+  const { url, pathToCLIArchive } = await downloadFirstAvailable(urls);
   core.debug(`iamlive CLI archive downloaded to ${pathToCLIArchive}`);
 
   if (!(await verifyChecksum(pathToCLIArchive, checksums[version]))) {
     throw new Error(`Checksum didn't match: ${checksums[version]}.`);
   }
 
-  const pathToCLI = await extract(pathToCLIArchive, platform);
+  const pathToCLI = await extract(pathToCLIArchive, url);
   core.debug(`iamlive CLI path is ${pathToCLI}.`);
 
   if (!pathToCLIArchive || !pathToCLI) {
